@@ -31,6 +31,8 @@ def scrape_page(url, path="screenshot.png", plot=False, bbox=True, return_str=Tr
                 const foremostElement = document.elementFromPoint(x, y);
                 return element.contains(foremostElement);
             }""", element_handle)
+        
+        input()
 
         for role in navigation_roles:
             try:
@@ -104,19 +106,10 @@ def scrape_page(url, path="screenshot.png", plot=False, bbox=True, return_str=Tr
                     ]
                     web_scrape += f"<{element['role']} id={i} bbox={bounding_box}> {element['text']}</{element['role']}>\n"
             else:
-                for element in dom_elements:
-                    web_scrape += f"<{element['role']}> {element['text']} </{element['role']}>\n"
+                for i, element in enumerate(dom_elements):
+                    web_scrape += f"<{element['role']} id={i}> {element['text']} </{element['role']}>\n"
 
             return web_scrape
         else:
             return dom_elements
         
-
-if __name__ == "__main__":
-
-    urls = [
-        "https://www.instagram.com/"
-    ]
-    for url in urls:
-        print(scrape_page(url, plot=False))
-        print()
