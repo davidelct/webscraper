@@ -32,8 +32,6 @@ def scrape_page(url, path="screenshot.png", plot=False, bbox=True, return_str=Tr
                 return element.contains(foremostElement);
             }""", element_handle)
         
-        input()
-
         for role in navigation_roles:
             try:
                 locators = page.get_by_role(role).all()
@@ -113,3 +111,11 @@ def scrape_page(url, path="screenshot.png", plot=False, bbox=True, return_str=Tr
         else:
             return dom_elements
         
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-u", "--url", help="URL to scrape")
+
+    args = parser.parse_args()
+
+    print(scrape_page(args.url))
